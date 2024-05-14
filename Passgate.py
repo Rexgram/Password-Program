@@ -1,7 +1,19 @@
+from pip._internal import main as pipmain
+import site
+
+def install(package):
+    pipmain(['install', package])
+    
+if 'pynput' not in site.getsitepackages() or 'colorama' not in site.getsitepackages() or 'keyboard' not in site.getsitepackages():
+    install('colorama')
+    install('keyboard')
+    install('pynput')
+    print(site.getsitepackages())
+    
 from pynput.keyboard import Listener
+from time import sleep as sl, sleep
 from colorama import Fore as col
 from threading import Thread
-from time import sleep as sl, sleep
 from random import choice
 from re import T
 import keyboard
