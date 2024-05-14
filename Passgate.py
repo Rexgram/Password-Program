@@ -173,7 +173,7 @@ def main():
                 #sl(0.5)
 
             #continue
-            #scroll wheel------------
+            #scroll wheel
 
 #PROGRAM'S DOWN HERE============================================================================================================================================
 #PROGRAM'S DOWN HERE============================================================================================================================================
@@ -197,6 +197,10 @@ def newPassword():
             continue
         else:
             break
+        
+    if not os.path.exists(UDFP + "\\PassHolder\\"):
+        passwordHolderDir = UDFP + "\\PassHolder\\"
+        os.makedirs(passwordHolderDir)
     
     if os.path.isfile(UDFP + "/PassHolder/" + newPassname + ".txt"):#does the file already exist?
         print(col.RED + "WARNING!", end='')
@@ -211,8 +215,9 @@ def newPassword():
             print(col.GREEN + " Overwritten." + col.WHITE)
     else:
         pass
+    
     with open(UDFP + "\\PassHolder\\" + newPassname + ".txt", 'w') as newPass:#make the file
-    #new file----------------
+    #new file
 
         listKeyboard = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
         'o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F',
@@ -220,7 +225,7 @@ def newPassword():
         'Y','Z','1','2','3','4','5','6','7','8','9','0','!','@','#','$','%','^',
         '&','*','(',')','_','+','{','}','|',':','"','<','>','?','-','=','[',']',
         ';',',','.','/','`','~']#full keyboard list
-        #char-list----------------
+        #char list
 
         listAlphabetlowercase = ['a','b','c','d','e','f','g','h','i','j',
         'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']#lowercase alphabet
@@ -228,11 +233,11 @@ def newPassword():
         listAlphabetuppercase = ['A','B','C','D','E','F','G','H','I','J',
         'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']#uppercase alphabet
 
-        listNumber = ['1','2','3','4','5','6','7','8','9','0']#0-9 list
+        listNumber = ['1','2','3','4','5','6','7','8','9','0']#0 9 list
 
         listSpecial = ['!','@','#','$','%','^','&','*','(',')','_','+','{',
         '}','|',':','"','<','>','?','-','=','[',']',';',',','.','/','`','~']#special char list
-        #req char list----------------
+        #req char list
 
         newPass.write(choice(listKeyboard))
         newPass.write(choice(listAlphabetuppercase))
@@ -241,7 +246,7 @@ def newPassword():
         newPass.write(choice(listKeyboard))
         newPass.write(choice(listSpecial))
         newPass.write(choice(listKeyboard))
-        #req char gen----------------
+        #req char gen
     
         for i in range(43):
             newPass.write(choice(listKeyboard))
@@ -249,28 +254,28 @@ def newPassword():
 
     with open(UDFP + "/PassHolder/" + newPassname + ".txt", 'r') as newPassread:
         [print("\nName:", newPassname, "\nPassword:", line.strip(), "\n") for line in newPassread.readlines()]
-        input("Enter to Continue-------------------------------------------")
+        input("Enter to Continue ")
         newPassread.close()
-            #Generator----------------
+            #Generator
 
 def getPassword(): 
     UDFP = os.path.dirname(os.path.abspath(__file__))
     reline()
 
-    #imports------------------
+    #imports
 
     while True:
-        filePassname = input("Enter a password name, or enter EXIT to return to the menu.").strip().lower()
+        filePassname = input("Enter a password name, or enter EXIT to return to the menu.\n\n").strip().lower()
 
         if os.path.isfile(UDFP + "/PassHolder/" + filePassname + ".txt"):
             with open(UDFP + "/PassHolder/" + filePassname + ".txt", 'r') as filePass:
-                [print("\nName:", filePassname, "\nPassword:", line.strip(), "\n--------------------------------------------------") for line in filePass.readlines()]
+                [print("\nName:", filePassname, "\nPassword:", line.strip()) for line in filePass.readlines()]
                 filePass.close()
-                input("Enter to Continue-------------------------------------------")
+                input("Enter to Continue")
                 break
 
         else:
-            print("\nSorry, I couldn't find this file because it either doesn't exist, or isnt in my directory. Please try again, or press N to exit.\n---------------------------------------------------------------------------------------------------------------------------------\n")
+            print("\nSorry, I couldn't find this file because it either doesn't exist, or isnt in my directory. Please try again, or press N to exit.\n\n")
             continue
 
 def deletePassword():
@@ -278,7 +283,7 @@ def deletePassword():
     reline()
 
     while True:
-        print("--------------------------------------------------\nChoose what file to delete.\n")
+        print("\nChoose what file to delete.\n")
         deleteInput = input().strip().lower()
 
         sure = ["Y", "y"]
@@ -296,9 +301,9 @@ def deletePassword():
                 sl(0.5)
                 print("\n")
                 os.remove(UDFP + "/PassHolder/" + deleteInput + ".txt")
-                print(col.GREEN + "The file has been deleted.\n--------------------------------------------------" + col.WHITE)
-                reline()
+                print(col.GREEN + "The file has been deleted.\n" + col.WHITE)
                 sl(1)
+                reline()
                 break
 
             elif sureCheck in unsure:
@@ -320,7 +325,7 @@ def deletePassword():
             reline()
             continue
 
-    #pass print---------------
+    #pass print 
 
 def editAny():
     UDFP = os.path.dirname(os.path.abspath(__file__))
@@ -411,7 +416,7 @@ def editAny():
     
     elif passwordChosen:
 
-        print("--------------------------------------------------------\nChoose which password to edit. (Q to quit)")
+        print("\nChoose which password to edit. (Q to quit)")
 
         while True:
             editInput = input().strip().lower()
@@ -425,13 +430,13 @@ def editAny():
                 if os.path.isfile(UDFP + "/PassHolder/" + editInput + ".txt"):
                     with open(UDFP + "/PassHolder/" + editInput + ".txt", 'r') as editor:
                         print("\nCurrent Password\n|\n|\nV\n")
-                        [print(line.strip(), "\n--------------------------------------------------") for line in editor.readlines()]
+                        [print(line.strip(), "\n") for line in editor.readlines()]
                         editor.close
                         with open(UDFP + "/PassHolder/" + editInput + ".txt", 'w') as edited:
                             print("New Password\n|\n|\nV\n")
                             spirit = input().strip()
                             edited.write(spirit)
-                            print("--------------------------------------------------\n")
+                            print("\n")
                             edited.close
                             break
                 else:
@@ -444,8 +449,8 @@ def showAllPasswords():
 
     for fileName_relative in glob.glob(UDFP + "/PassHolder/*.txt",recursive=True):
         fileName_absolute = os.path.basename(fileName_relative)
-        print("\n-" + fileName_absolute)
-    input("Press enter to continue--------------")
+        print("\n " + fileName_absolute)
+    input("Press enter to continue")
 
 def credits():
     reline()
